@@ -13,6 +13,9 @@ extends Control
 @onready var heart2 = $health/heart2
 @onready var heart3 = $health/heart3
 
+@onready var floorNum = $Floor/floor_number
+@onready var machNum = $Floor/machines
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if OS.is_debug_build():
@@ -49,6 +52,12 @@ func _process(_delta):
 		$ActiveAbility/cooldownBar.value = player.coolDownTimer
 	else:
 		activeCooldown.hide()
+	
+	floorNum.text = 'FLOOR ' + str(the_floor.floorNumber)
+	if (the_floor.panicMode):
+		machNum.text = str(int(the_floor.panictimeLeft)) + ' seconds left!'
+	else:
+		machNum.text = str(the_floor.machinesComplete) + '/' + str(the_floor.machinesTotal) + ' Machines'
 	
 	
 	healthUpdate(player.health, player.main)

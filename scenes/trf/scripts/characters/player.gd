@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var scthing = get_owner().get_node("HUD/skillcheck")
+@onready var floorShit = get_owner().get_node("the_floor")
 var input_direction = Vector2(0,0)
 
 @export var toonName:String = ""
@@ -62,7 +63,10 @@ func _physics_process(delta):
 		maxHealth = 2
 	else:
 		maxHealth = 3
-		
+	
+	if floorShit.gonnaDie == 2:
+		health = 0
+	
 	if onMachine and not scthing.activateSkillCheck:
 		skillChanceTimer -= 1 * delta
 		if skillChanceTimer < 0:

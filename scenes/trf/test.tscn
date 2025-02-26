@@ -1,10 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://bxc52isy07joo"]
+[gd_scene load_steps=13 format=3 uid="uid://bxc52isy07joo"]
 
 [ext_resource type="Texture2D" uid="uid://b4eowmxm611is" path="res://assets/graphics/missing.png" id="1_h0s6o"]
 [ext_resource type="Script" path="res://scenes/trf/scripts/floordata.gd" id="1_jtf4s"]
 [ext_resource type="PackedScene" uid="uid://ce1hj13r5d67u" path="res://scenes/trf/objects/player.tscn" id="2_rq4m2"]
+[ext_resource type="AudioStream" uid="uid://b2jjei3enpnmq" path="res://assets/audio/sounds/floor/clock_tick_fade.ogg" id="2_xqvrc"]
 [ext_resource type="PackedScene" uid="uid://dktpjmfgyxawi" path="res://scenes/trf/objects/hud.tscn" id="3_iigak"]
+[ext_resource type="AudioStream" uid="uid://b1via7bo3bjb7" path="res://assets/audio/sounds/floor/lights_shut_off.ogg" id="3_itm3p"]
+[ext_resource type="AudioStream" uid="uid://dthdud0hjngjd" path="res://assets/audio/sounds/floor/electronic_ping_short.ogg" id="4_r3j47"]
 [ext_resource type="PackedScene" uid="uid://dr1xgsnlae4da" path="res://scenes/trf/objects/skillcheck.tscn" id="5_t2ehe"]
+[ext_resource type="FontFile" uid="uid://cxw0w38m3cye4" path="res://assets/fonts/vcr.ttf" id="6_qk7h5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5yldh"]
 size = Vector2(58, 58)
@@ -22,6 +26,16 @@ visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_jtf4s")
+
+[node name="blackout_uhoh" type="AudioStreamPlayer" parent="the_floor"]
+stream = ExtResource("2_xqvrc")
+
+[node name="lights_shut" type="AudioStreamPlayer" parent="the_floor"]
+stream = ExtResource("3_itm3p")
+
+[node name="ping" type="AudioStreamPlayer" parent="the_floor"]
+stream = ExtResource("4_r3j47")
+volume_db = -10.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(640, 360)
@@ -43,7 +57,19 @@ shape = SubResource("RectangleShape2D_5yldh")
 
 [node name="skillcheck" parent="HUD" instance=ExtResource("5_t2ehe")]
 
+[node name="debug" type="Label" parent="HUD"]
+visible = false
+offset_left = 480.0
+offset_top = 24.0
+offset_right = 800.0
+offset_bottom = 256.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("6_qk7h5")
+theme_override_font_sizes/font_size = 16
+horizontal_alignment = 1
+
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 position = Vector2(192, 320)
 scale = Vector2(128.5, 128.5)
 energy = 0.27
