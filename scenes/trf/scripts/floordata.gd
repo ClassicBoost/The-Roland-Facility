@@ -2,9 +2,11 @@ extends Panel
 # I'm lazy
 @export var game_lunaticMode:bool = false
 
+@export var floorNumber:int = 1
+
 #region Events
 @export var blackout:bool = false
-@export var blackoutPre:int = 0
+var blackoutPre:int = 0
 @export var gasleak:bool = false
 @export var redlights:bool = false
 @export var notwisteds:bool = false # always set to true on first floor
@@ -36,8 +38,6 @@ var panictimeLeft:float = 60
 var timeint:int = 60
 var gonnaDie:int = 0
 
-@export var floorNumber:int = 1
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -49,6 +49,11 @@ func _process(delta):
 		notwisteds = true
 	
 #region Panic Mode
+	if machinesComplete >= machinesTotal:
+		panicMode = true
+	else:
+		panicMode = false
+	
 	if panicMode:
 		panictimeLeft -= 1 * delta
 		if panictimeLeft < 0:
