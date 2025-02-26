@@ -1,0 +1,16 @@
+{
+	"name": "Stev",
+	"main": false,
+	
+	"skillcheck": 1,
+	"movement": 2,
+	"stamina": 5,
+	"breath": 4,
+	"extraction": 3,
+	"skillchance": 0.35,
+	
+	"active": ["Tail Strike", "Stuns a twisted of your choice", 30],
+	"passive": ["", ""],
+	
+	"description": ""
+}

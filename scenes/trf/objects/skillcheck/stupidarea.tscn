@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://bphmqm6sf625x"]
+
+[node name="stupidarea" type="Area2D"]
+position = Vector2(32, 24)

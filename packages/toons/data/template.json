@@ -1,0 +1,16 @@
+{
+	"name": "",
+	"main": false,
+	
+	"skillcheck": 3,
+	"movement": 3,
+	"stamina": 3,
+	"breath": 3,
+	"extraction": 3,
+	"skillchance": 0.25,
+	
+	"active": ["", "", 1],
+	"passive": ["", ""],
+	
+	"description": ""
+}

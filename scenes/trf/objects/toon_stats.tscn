@@ -1,0 +1,360 @@
+[gd_scene load_steps=27 format=3 uid="uid://q5oawlifbfmq"]
+
+[ext_resource type="Script" path="res://scenes/trf/scripts/objects/toon_stats.gd" id="1_0qpwh"]
+[ext_resource type="FontFile" uid="uid://cxw0w38m3cye4" path="res://assets/fonts/vcr.ttf" id="1_lrju3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ughab"]
+bg_color = Color(0.6736, 0.171289, 0.14566, 1)
+
+[sub_resource type="Gradient" id="Gradient_dnfsb"]
+colors = PackedColorArray(0.34086, 0.101841, 0.094611, 1, 0.867566, 0.249737, 0.261062, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ej66x"]
+gradient = SubResource("Gradient_dnfsb")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lxuqr"]
+texture = SubResource("GradientTexture2D_ej66x")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nok0i"]
+bg_color = Color(0.547971, 0.246971, 0.118586, 1)
+
+[sub_resource type="Gradient" id="Gradient_m0gxu"]
+colors = PackedColorArray(0.676112, 0.296621, 0.1682, 1, 0.928231, 0.510508, 0.376566, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qky1p"]
+gradient = SubResource("Gradient_m0gxu")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4hh7e"]
+texture = SubResource("GradientTexture2D_qky1p")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6gt7w"]
+bg_color = Color(0.5533, 0.398152, 0.178543, 1)
+
+[sub_resource type="Gradient" id="Gradient_8cnd7"]
+colors = PackedColorArray(0.415764, 0.323111, 0.0667261, 1, 0.860836, 0.758472, 0.480079, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_l75rj"]
+gradient = SubResource("Gradient_8cnd7")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p8tsy"]
+texture = SubResource("GradientTexture2D_l75rj")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_65jhq"]
+bg_color = Color(0.307896, 0.459914, 0.180767, 1)
+
+[sub_resource type="Gradient" id="Gradient_mh3lc"]
+colors = PackedColorArray(0.216084, 0.397629, 0.145526, 1, 0.483573, 0.778165, 0.35176, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4bowr"]
+gradient = SubResource("Gradient_mh3lc")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k1hmn"]
+texture = SubResource("GradientTexture2D_4bowr")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bo1gb"]
+bg_color = Color(0.172321, 0.359925, 0.516131, 1)
+
+[sub_resource type="Gradient" id="Gradient_wce0i"]
+colors = PackedColorArray(0.0864203, 0.282057, 0.706336, 1, 0.510356, 0.67071, 0.959947, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dtei0"]
+gradient = SubResource("Gradient_wce0i")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5bvt3"]
+texture = SubResource("GradientTexture2D_dtei0")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gffwp"]
+bg_color = Color(0.428652, 0.207173, 0.605074, 1)
+
+[sub_resource type="Gradient" id="Gradient_r1xhk"]
+colors = PackedColorArray(0.348839, 0.178914, 0.549785, 1, 0.787089, 0.547243, 0.867154, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jt8rn"]
+gradient = SubResource("Gradient_r1xhk")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_185v8"]
+texture = SubResource("GradientTexture2D_jt8rn")
+
+[node name="Toon Stats" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0qpwh")
+
+[node name="Stats Array" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 384.0
+
+[node name="Health" type="NinePatchRect" parent="Stats Array"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 64.0
+
+[node name="top" type="Panel" parent="Stats Array/Health"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 64.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ughab")
+
+[node name="bg" type="Panel" parent="Stats Array/Health"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 304.0
+offset_bottom = 56.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_lxuqr")
+
+[node name="stat" type="Label" parent="Stats Array/Health"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 304.0
+offset_bottom = 23.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_lrju3")
+theme_override_font_sizes/font_size = 16
+text = "HEALTH"
+horizontal_alignment = 1
+
+[node name="level" type="Label" parent="Stats Array/Health"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 11.0
+offset_right = 304.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_lrju3")
+theme_override_font_sizes/font_size = 32
+text = "★★★"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Skill Check" type="NinePatchRect" parent="Stats Array"]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 320.0
+offset_bottom = 128.0
+
+[node name="top" type="Panel" parent="Stats Array/Skill Check"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 64.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nok0i")
+
+[node name="bg" type="Panel" parent="Stats Array/Skill Check"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 304.0
+offset_bottom = 56.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_4hh7e")
+
+[node name="stat" type="Label" parent="Stats Array/Skill Check"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 304.0
+offset_bottom = 23.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_lrju3")
+theme_override_font_sizes/font_size = 16
+text = "SKILL CHECK"
+horizontal_alignment = 1
+
+[node name="level" type="Label" parent="Stats Array/Skill Check"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 11.0
+offset_right = 304.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/line_spacing = 0
+theme_override_fonts/font = ExtResource("1_lrju3")
+theme_override_font_sizes/font_size = 32
+text = "★★★★★"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Movement" type="NinePatchRect" parent="Stats Array"]
+layout_mode = 0
+offset_top = 128.0
+offset_right = 320.0
+offset_bottom = 192.0
+
+[node name="top" type="Panel" parent="Stats Array/Movement"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 64.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_6gt7w")
+
+[node name="bg" type="Panel" parent="Stats Array/Movement"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 304.0
+offset_bottom = 56.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_p8tsy")
+
+[node name="stat" type="Label" parent="Stats Array/Movement"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 304.0
+offset_bottom = 23.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_lrju3")
+theme_override_font_sizes/font_size = 16
+text = "MOVEMENT SPEED"
+horizontal_alignment = 1
+
+[node name="level" type="Label" parent="Stats Array/Movement"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 11.0
+offset_right = 304.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_lrju3")
+theme_override_font_sizes/font_size = 32
+text = "★★★★★"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stamina" type="NinePatchRect" parent="Stats Array"]
+layout_mode = 0
+offset_top = 192.0
+offset_right = 320.0
+offset_bottom = 256.0
+
+[node name="top" type="Panel" parent="Stats Array/Stamina"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 64.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_65jhq")
+
+[node name="bg" type="Panel" parent="Stats Array/Stamina"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 304.0
+offset_bottom = 56.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_k1hmn")
+
+[node name="stat" type="Label" parent="Stats Array/Stamina"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 304.0
+offset_bottom = 23.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_lrju3")
+theme_override_font_sizes/font_size = 16
+text = "STAMINA"
+horizontal_alignment = 1
+
+[node name="level" type="Label" parent="Stats Array/Stamina"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 11.0
+offset_right = 304.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_lrju3")
+theme_override_font_sizes/font_size = 32
+text = "★★★★★"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Breathing" type="NinePatchRect" parent="Stats Array"]
+layout_mode = 0
+offset_top = 256.0
+offset_right = 320.0
+offset_bottom = 320.0
+
+[node name="top" type="Panel" parent="Stats Array/Breathing"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 64.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bo1gb")
+
+[node name="bg" type="Panel" parent="Stats Array/Breathing"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 304.0
+offset_bottom = 56.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_5bvt3")
+
+[node name="stat" type="Label" parent="Stats Array/Breathing"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 304.0
+offset_bottom = 23.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_lrju3")
+theme_override_font_sizes/font_size = 16
+text = "BREATH"
+horizontal_alignment = 1
+
+[node name="level" type="Label" parent="Stats Array/Breathing"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 11.0
+offset_right = 304.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_lrju3")
+theme_override_font_sizes/font_size = 32
+text = "★★★★★"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Extraction" type="NinePatchRect" parent="Stats Array"]
+layout_mode = 0
+offset_top = 320.0
+offset_right = 320.0
+offset_bottom = 384.0
+
+[node name="top" type="Panel" parent="Stats Array/Extraction"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 64.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gffwp")
+
+[node name="bg" type="Panel" parent="Stats Array/Extraction"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 304.0
+offset_bottom = 56.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_185v8")
+
+[node name="stat" type="Label" parent="Stats Array/Extraction"]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 304.0
+offset_bottom = 23.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_lrju3")
+theme_override_font_sizes/font_size = 16
+text = "EXTRACTION SPEED"
+horizontal_alignment = 1
+
+[node name="level" type="Label" parent="Stats Array/Extraction"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 11.0
+offset_right = 304.0
+offset_bottom = 55.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("1_lrju3")
+theme_override_font_sizes/font_size = 32
+text = "★★★★★"
+horizontal_alignment = 1
+vertical_alignment = 1

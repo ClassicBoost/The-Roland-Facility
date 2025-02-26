@@ -1,0 +1,135 @@
+[gd_scene load_steps=17 format=3 uid="uid://dr1xgsnlae4da"]
+
+[ext_resource type="Script" path="res://scenes/trf/scripts/objects/skillcheck.gd" id="1_ojtme"]
+[ext_resource type="FontFile" uid="uid://cxw0w38m3cye4" path="res://assets/fonts/vcr.ttf" id="2_1whud"]
+
+[sub_resource type="Gradient" id="Gradient_6lfy6"]
+colors = PackedColorArray(0.244776, 0.244776, 0.244776, 1, 0.385493, 0.385492, 0.385492, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_iuoth"]
+gradient = SubResource("Gradient_6lfy6")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7xmfq"]
+texture = SubResource("GradientTexture2D_iuoth")
+
+[sub_resource type="Gradient" id="Gradient_r7atm"]
+colors = PackedColorArray(0.347817, 0.347817, 0.347817, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_11alw"]
+gradient = SubResource("Gradient_r7atm")
+fill_from = Vector2(1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xvxpw"]
+texture = SubResource("GradientTexture2D_11alw")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5c2y4"]
+size = Vector2(64, 48)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bfh73"]
+bg_color = Color(0.869211, 0.171982, 0.0550221, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vpbtv"]
+size = Vector2(3, 80)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0u6es"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_esgwq"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ryhbn"]
+bg_color = Color(0.347817, 0.347817, 0.347817, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pc748"]
+bg_color = Color(0.783523, 0.783523, 0.783523, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ivqu"]
+bg_color = Color(0.493545, 0.493546, 0.493545, 1)
+
+[node name="skillcheck" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ojtme")
+
+[node name="bar" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="bg" type="Panel" parent="bar"]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 584.0
+offset_right = 960.0
+offset_bottom = 632.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_7xmfq")
+
+[node name="collabarea" type="PanelContainer" parent="bar"]
+layout_mode = 0
+offset_left = 576.0
+offset_top = 584.0
+offset_right = 640.0
+offset_bottom = 632.0
+
+[node name="collabarea" type="Panel" parent="bar/collabarea"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_xvxpw")
+
+[node name="stupidarea" type="Area2D" parent="bar/collabarea/collabarea"]
+position = Vector2(32, 24)
+
+[node name="c" type="CollisionShape2D" parent="bar/collabarea/collabarea/stupidarea"]
+shape = SubResource("RectangleShape2D_5c2y4")
+debug_color = Color(0.977216, 0.995277, 1, 0.42)
+
+[node name="marker" type="Panel" parent="bar"]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 568.0
+offset_right = 323.0
+offset_bottom = 648.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bfh73")
+
+[node name="a" type="Area2D" parent="bar/marker"]
+
+[node name="c" type="CollisionShape2D" parent="bar/marker/a"]
+position = Vector2(1.5, 40)
+shape = SubResource("RectangleShape2D_vpbtv")
+debug_color = Color(0.89162, 0.307883, 0.266691, 0.42)
+
+[node name="SkillCheck" type="Button" parent="bar"]
+layout_mode = 0
+offset_left = 512.0
+offset_top = 512.0
+offset_right = 768.0
+offset_bottom = 560.0
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_1whud")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/focus = SubResource("StyleBoxFlat_0u6es")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_esgwq")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ryhbn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pc748")
+theme_override_styles/normal = SubResource("StyleBoxFlat_3ivqu")
+text = "SKILLCHECK"
+
+[node name="skillcheckhit" type="Label" parent="."]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 584.0
+offset_right = 960.0
+offset_bottom = 632.0
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_1whud")
+theme_override_font_sizes/font_size = 32
+text = "Nice."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="area_entered" from="bar/collabarea/collabarea/stupidarea" to="." method="_in_collab"]
+[connection signal="area_exited" from="bar/collabarea/collabarea/stupidarea" to="." method="_out_collab"]
+[connection signal="pressed" from="bar/SkillCheck" to="." method="hit_skillcheck"]

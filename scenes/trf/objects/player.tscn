@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://ce1hj13r5d67u"]
+
+[ext_resource type="Script" path="res://scenes/trf/scripts/characters/player.gd" id="1_75lh4"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_e7ee0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ntews"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ujt54"]
+radius = 256.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_75lh4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(80, 80)
+texture = SubResource("PlaceholderTexture2D_e7ee0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_ntews")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="breath" type="Area2D" parent="."]
+
+[node name="breathingRadius" type="CollisionShape2D" parent="breath"]
+shape = SubResource("CircleShape2D_ujt54")

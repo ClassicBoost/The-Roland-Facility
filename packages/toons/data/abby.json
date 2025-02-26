@@ -1,0 +1,16 @@
+{
+	"name": "Abby",
+	"main": true,
+	
+	"skillcheck": 1,
+	"movement": 1,
+	"stamina": 1,
+	"breath": 1,
+	"extraction": 1,
+	"skillchance": 0.5,
+	
+	"active": ["", "Kills yourself apon use", 1],
+	"passive": ["Glutton", "You breathe extremely loudly."],
+	
+	"description": "You're fucked."
+}
