@@ -1,0 +1,16 @@
+{
+	"name": "Raylo",
+	"main": true,
+	
+	"skillcheck": 2,
+	"movement": 3,
+	"stamina": 2,
+	"breath": 4,
+	"extraction": 5,
+	"skillchance": 0.35,
+	
+	"active": ["Tail Strike", "Causes you to spin a circle, twisteds that are near you will get stunned for 5 seconds and cost 60 stamina. Cooldown of 25 seconds.", 25],
+	"passive": ["Problem Solver", "I want you to guess what this does."],
+	
+	"description": ""
+}

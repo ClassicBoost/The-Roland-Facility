@@ -34,7 +34,7 @@ var chanceCap = [
 @export var machinesComplete:int = 0
 @export var machinesTotal:int = 2
 @export var panicMode:bool = false
-var panictimeLeft:float = 60
+@export var panictimeLeft:float = 60
 var timeint:int = 60
 var gonnaDie:int = 0
 
@@ -45,8 +45,14 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	machinesTotal = int(3.21279 + (0.22354 * floorNumber))
+	if machinesTotal < 4:
+		machinesTotal = 4
+	if machinesTotal > 8:
+		machinesTotal = 8
 	if floorNumber == 1:
 		notwisteds = true
+		machinesTotal = 2
 	
 #region Panic Mode
 	if machinesComplete >= machinesTotal:
@@ -59,11 +65,15 @@ func _process(delta):
 		if panictimeLeft < 0:
 			panictimeLeft = 1
 			gonnaDie += 1
-		if int(panictimeLeft) != timeint and gonnaDie < 2:
+		if int(panictimeLeft) != timeint:
 			timeint = int(panictimeLeft)
-			$ping.play()
+			if gonnaDie < 2:
+				$tick.play()
+				if int(panictimeLeft) <= 10:
+					$ping.play()
 	else:
 		panictimeLeft = 60
+		gonnaDie = 0
 #endregion
 	
 	if OS.is_debug_build() and Input.is_action_just_pressed("debug2"):
@@ -131,6 +141,7 @@ func newFloor():
 		print('blackout incoming!')
 	if gslRNG < gasleakChance:
 		gasleak = true
+		gasleakChance = 0
 		print('gas leak incoming!')
 	if rdlRNG < redlightsChance and blackoutPre == 0: # no point having them be red if it's a blackout.
 		redlights = true

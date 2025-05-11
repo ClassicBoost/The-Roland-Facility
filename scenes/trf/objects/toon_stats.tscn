@@ -1,6 +1,6 @@
 [gd_scene load_steps=27 format=3 uid="uid://q5oawlifbfmq"]
 
-[ext_resource type="Script" path="res://scenes/trf/scripts/objects/toon_stats.gd" id="1_0qpwh"]
+[ext_resource type="Script" uid="uid://c4m77y1hpwe6w" path="res://scenes/trf/scripts/objects/toon_stats.gd" id="1_0qpwh"]
 [ext_resource type="FontFile" uid="uid://cxw0w38m3cye4" path="res://assets/fonts/vcr.ttf" id="1_lrju3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ughab"]

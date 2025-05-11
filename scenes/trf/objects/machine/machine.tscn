@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://jojniih0ycso"]
+
+[ext_resource type="Script" uid="uid://cmdd7nwb6h0a1" path="res://scenes/trf/scripts/objects/machine.gd" id="1_k8lx4"]
+[ext_resource type="AudioStream" uid="uid://mtvuhcavoscl" path="res://assets/audio/sounds/floor/machine_complete.ogg" id="2_tytcg"]
+[ext_resource type="FontFile" uid="uid://cxw0w38m3cye4" path="res://assets/fonts/vcr.ttf" id="3_a3uk1"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_banh4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4gduq"]
+size = Vector2(256, 192)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k8lx4"]
+size = Vector2(96, 168)
+
+[node name="Machine" type="Node2D"]
+script = ExtResource("1_k8lx4")
+
+[node name="complete" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_tytcg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(3.8147e-06, -28)
+scale = Vector2(96, 168)
+texture = SubResource("PlaceholderTexture2D_banh4")
+
+[node name="EnterThing" type="Area2D" parent="."]
+
+[node name="lol" type="CollisionShape2D" parent="EnterThing"]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_4gduq")
+debug_color = Color(1, 1, 1, 0.42)
+
+[node name="CollisionThing" type="Area2D" parent="."]
+disable_mode = 2
+
+[node name="CollisionThing" type="CollisionShape2D" parent="CollisionThing"]
+position = Vector2(0, -28)
+shape = SubResource("RectangleShape2D_k8lx4")
+one_way_collision_margin = 0.0
+debug_color = Color(0.238398, 0.15094, 0.271037, 0.42)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -24.0
+offset_top = -48.0
+offset_right = 16.0
+offset_bottom = -25.0
+theme_override_fonts/font = ExtResource("3_a3uk1")
+text = "0%"
+
+[connection signal="area_entered" from="EnterThing" to="." method="_on_enter_thing_area_entered"]
+[connection signal="area_exited" from="EnterThing" to="." method="_on_enter_thing_area_exited"]

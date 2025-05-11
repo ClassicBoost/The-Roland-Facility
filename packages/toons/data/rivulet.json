@@ -1,0 +1,16 @@
+{
+	"name": "Rivulet",
+	"main": true,
+	
+	"skillcheck": 1,
+	"movement": 5,
+	"stamina": 4,
+	"breath": 2,
+	"extraction": 4,
+	"skillchance": 0.2,
+	
+	"active": ["Slide", "", 40],
+	"passive": ["ADHD", ""],
+	
+	"description": "ruffles :D"
+}

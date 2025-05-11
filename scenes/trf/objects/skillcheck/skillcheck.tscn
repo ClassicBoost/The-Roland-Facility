@@ -1,9 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://dr1xgsnlae4da"]
+[gd_scene load_steps=19 format=3 uid="uid://dr1xgsnlae4da"]
 
-[ext_resource type="Script" path="res://scenes/trf/scripts/objects/skillcheck.gd" id="1_ojtme"]
+[ext_resource type="Script" uid="uid://0ih6ydjs6u2d" path="res://scenes/trf/scripts/objects/skillcheck.gd" id="1_ojtme"]
 [ext_resource type="FontFile" uid="uid://cxw0w38m3cye4" path="res://assets/fonts/vcr.ttf" id="2_1whud"]
-[ext_resource type="PackedScene" uid="uid://bphmqm6sf625x" path="res://scenes/trf/objects/skillcheck/stupidarea.tscn" id="2_pqdle"]
-[ext_resource type="Script" path="res://scenes/trf/scripts/objects/skillcheck/stupidarea.gd" id="3_d86me"]
+[ext_resource type="PackedScene" uid="uid://b63n2oyma5pym" path="res://scenes/trf/objects/skillcheck/stupidarea.tscn" id="2_pqdle"]
 [ext_resource type="AudioStream" uid="uid://dodk31ado5jkv" path="res://assets/audio/sounds/skillcheck/popup.ogg" id="5_c8cn1"]
 
 [sub_resource type="Gradient" id="Gradient_6lfy6"]
@@ -86,7 +85,6 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_xvxpw")
 
 [node name="stupidarea" parent="bar/collabarea/collabarea" instance=ExtResource("2_pqdle")]
-script = ExtResource("3_d86me")
 
 [node name="c2" type="CollisionShape2D" parent="bar/collabarea/collabarea/stupidarea"]
 shape = SubResource("RectangleShape2D_waxhr")
@@ -100,9 +98,9 @@ offset_right = 323.0
 offset_bottom = 648.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_bfh73")
 
-[node name="a" type="Area2D" parent="bar/marker"]
+[node name="thing" type="Area2D" parent="bar/marker"]
 
-[node name="c" type="CollisionShape2D" parent="bar/marker/a"]
+[node name="c" type="CollisionShape2D" parent="bar/marker/thing"]
 position = Vector2(1.5, 40)
 shape = SubResource("RectangleShape2D_vpbtv")
 debug_color = Color(0.89162, 0.307883, 0.266691, 0.42)
@@ -140,4 +138,6 @@ vertical_alignment = 1
 [node name="audio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_c8cn1")
 
+[connection signal="area_entered" from="bar/collabarea/collabarea/stupidarea" to="." method="_on_stupidarea_area_entered"]
+[connection signal="area_exited" from="bar/collabarea/collabarea/stupidarea" to="." method="_on_stupidarea_area_exited"]
 [connection signal="pressed" from="SkillCheck" to="." method="hit_skillcheck"]

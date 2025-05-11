@@ -1,14 +1,20 @@
-[gd_scene load_steps=13 format=3 uid="uid://bxc52isy07joo"]
+[gd_scene load_steps=17 format=3 uid="uid://bxc52isy07joo"]
 
 [ext_resource type="Texture2D" uid="uid://b4eowmxm611is" path="res://assets/graphics/missing.png" id="1_h0s6o"]
-[ext_resource type="Script" path="res://scenes/trf/scripts/floordata.gd" id="1_jtf4s"]
+[ext_resource type="Script" uid="uid://cj6jfmc0ugewo" path="res://scenes/trf/scripts/floordata.gd" id="1_jtf4s"]
 [ext_resource type="PackedScene" uid="uid://ce1hj13r5d67u" path="res://scenes/trf/objects/player.tscn" id="2_rq4m2"]
 [ext_resource type="AudioStream" uid="uid://b2jjei3enpnmq" path="res://assets/audio/sounds/floor/clock_tick_fade.ogg" id="2_xqvrc"]
 [ext_resource type="PackedScene" uid="uid://dktpjmfgyxawi" path="res://scenes/trf/objects/hud.tscn" id="3_iigak"]
 [ext_resource type="AudioStream" uid="uid://b1via7bo3bjb7" path="res://assets/audio/sounds/floor/lights_shut_off.ogg" id="3_itm3p"]
 [ext_resource type="AudioStream" uid="uid://dthdud0hjngjd" path="res://assets/audio/sounds/floor/electronic_ping_short.ogg" id="4_r3j47"]
-[ext_resource type="PackedScene" uid="uid://dr1xgsnlae4da" path="res://scenes/trf/objects/skillcheck.tscn" id="5_t2ehe"]
+[ext_resource type="AudioStream" uid="uid://dv27e0l3ihthc" path="res://assets/audio/sounds/floor/timer_tick.ogg" id="5_nuav8"]
+[ext_resource type="PackedScene" uid="uid://dr1xgsnlae4da" path="res://scenes/trf/objects/skillcheck/skillcheck.tscn" id="5_t2ehe"]
 [ext_resource type="FontFile" uid="uid://cxw0w38m3cye4" path="res://assets/fonts/vcr.ttf" id="6_qk7h5"]
+[ext_resource type="PackedScene" uid="uid://jojniih0ycso" path="res://scenes/trf/objects/machine/machine.tscn" id="8_kkedi"]
+[ext_resource type="PackedScene" uid="uid://ctthib2r1cuam" path="res://scenes/trf/objects/twisteds/times_up_monster.tscn" id="9_57l4l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_57l4l"]
+size = Vector2(384, 189)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5yldh"]
 size = Vector2(58, 58)
@@ -37,19 +43,48 @@ stream = ExtResource("3_itm3p")
 stream = ExtResource("4_r3j47")
 volume_db = -10.0
 
+[node name="tick" type="AudioStreamPlayer" parent="the_floor"]
+stream = ExtResource("5_nuav8")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(640, 360)
-scale = Vector2(12.8, 7.2)
+position = Vector2(584, 55.9999)
+scale = Vector2(101.6, 47.68)
 texture = ExtResource("1_h0s6o")
 
 [node name="player" parent="." instance=ExtResource("2_rq4m2")]
 position = Vector2(640, 360)
+
+[node name="Elevator" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Elevator"]
+position = Vector2(576, -97.5)
+shape = SubResource("RectangleShape2D_57l4l")
+debug_color = Color(0.786556, 0.394323, 0.474455, 0.42)
 
 [node name="testAreaLol" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="testAreaLol"]
 position = Vector2(32, 224)
 shape = SubResource("RectangleShape2D_5yldh")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(192, 320)
+scale = Vector2(128.5, 128.5)
+energy = 0.27
+range_z_min = -54
+range_z_max = 9
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_qu5cu")
+
+[node name="Machine" parent="." instance=ExtResource("8_kkedi")]
+position = Vector2(256, 256)
+
+[node name="Machine2" parent="." instance=ExtResource("8_kkedi")]
+position = Vector2(1152, 256)
+
+[node name="times_up_monster" parent="." instance=ExtResource("9_57l4l")]
+position = Vector2(2192, 328)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -68,14 +103,6 @@ theme_override_fonts/font = ExtResource("6_qk7h5")
 theme_override_font_sizes/font_size = 16
 horizontal_alignment = 1
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
-position = Vector2(192, 320)
-scale = Vector2(128.5, 128.5)
-energy = 0.27
-range_z_min = -54
-range_z_max = 9
-shadow_enabled = true
-texture = SubResource("GradientTexture2D_qu5cu")
-
+[connection signal="area_entered" from="Elevator" to="player" method="_on_elevator_area_entered"]
+[connection signal="area_exited" from="Elevator" to="player" method="_on_elevator_area_exited"]
 [connection signal="area_entered" from="testAreaLol" to="player" method="_on_test_area_lol_area_entered"]

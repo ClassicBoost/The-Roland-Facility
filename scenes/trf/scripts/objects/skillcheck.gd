@@ -60,7 +60,7 @@ func _process(delta):
 		$bar.position.y = 50
 		$bar.modulate.a = 0
 	
-	if lengthinSkillCheck > 3.9:
+	if $bar/marker.position.x >= 960:
 		hit_skillcheck()
 	
 	if moveTimer < 0 and activateSkillCheck:
@@ -73,8 +73,11 @@ func _process(delta):
 	
 	$bar/collabarea/collabarea/stupidarea.position.x = annoyingAss[player.skillcheck-1]
 	
-	if Input.is_action_just_pressed("accept") and moveBar and activateSkillCheck:
+	if (Input.is_action_just_pressed("accept") or Input.is_action_just_pressed("interact")) and moveBar and activateSkillCheck:
 		hit_skillcheck()
+	
+	if not player.onMachine:
+		cancelSkillCheck()
 	
 	if Input.is_action_just_pressed("debug1") and OS.is_debug_build():
 		popupSkill()
@@ -93,7 +96,7 @@ func hit_skillcheck():
 	hitText.modulate.a = 2
 	hitText.show()
 	moveBar = false
-	if stupidarealul.inMarker:
+	if inMarker:
 		audio.stream = load("res://assets/audio/sounds/skillcheck/hit.ogg")
 		hitText.text = 'Nice'
 		hitText.set("theme_override_colors/font_color",Color(1.0,1.0,1.0,1.0))
@@ -106,3 +109,20 @@ func hit_skillcheck():
 	inMarker = false
 	audio.play()
 	lengthinSkillCheck = 0
+
+func cancelSkillCheck():
+	if activateSkillCheck:
+		activateSkillCheck = false
+		moveTimer = 0.75
+		moveBar = false
+		inMarker = false
+		lengthinSkillCheck = 0
+
+
+func _on_stupidarea_area_entered(area):
+	if area.name == 'thing':
+		inMarker = true
+
+func _on_stupidarea_area_exited(area):
+	if area.name == 'thing':
+		inMarker = false

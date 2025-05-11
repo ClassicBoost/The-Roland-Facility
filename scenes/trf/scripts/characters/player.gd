@@ -4,6 +4,8 @@ extends CharacterBody2D
 @onready var floorShit = get_owner().get_node("the_floor")
 var input_direction = Vector2(0,0)
 
+@export var currentPosition = Vector2(0,0)
+
 @export var toonName:String = ""
 
 var moveSpeed:float = 15
@@ -12,11 +14,11 @@ var sprinting = 0
 #region Stats
 @export var main = false
 var maxHealth = 3
-@export var skillcheck = 3
-@export var movement = 3
-@export var stamina = 3
-@export var breathing = 3 # like stealth, but through certain objects ig. 5 is like no breath radius or somethin.
-@export var extraction = 3
+@export var skillcheck:float = 3
+@export var movement:float = 3
+@export var stamina:float = 3
+@export var breathing:float = 3 # like stealth, but through certain objects ig. 5 is like no breath radius or somethin.
+@export var extraction:float = 3
 var breathRadius = [2, 1.5, 1.2, 1, 0.65, 0.3]
 @export var health = 3
 var actualStam:float = 150
@@ -50,6 +52,8 @@ var skillChanceTimer = 1
 @onready var breatheRange = $breath/breathingRadius
 @export var onMachine:bool = false
 
+@export var happiness:float = 50
+
 func _ready():
 	loadToon(toonName)
 
@@ -59,13 +63,10 @@ func _physics_process(delta):
 		Input.get_action_strength("down") - Input.get_action_strength("up")
 	)
 	
-	if main:
-		maxHealth = 2
-	else:
-		maxHealth = 3
-	
-	if floorShit.gonnaDie == 2:
-		health = 0
+	#if main:
+	#	maxHealth = 2
+	#else:
+	#	maxHealth = 3
 	
 	if onMachine and not scthing.activateSkillCheck:
 		skillChanceTimer -= 1 * delta
@@ -100,6 +101,7 @@ func _physics_process(delta):
 	
 	maxStam = actualmaxStam * stamMultiplier
 	
+	currentPosition = Vector2(self.position.x, self.position.y)
 	
 	if (Input.get_action_strength("sprint") and !disableSprint) and (self.velocity.x != 0 or self.velocity.y != 0):
 		velocity = (input_direction * (((moveSpeed+10) * 10)) * runMultiplier) * (delta * 90)
@@ -110,9 +112,9 @@ func _physics_process(delta):
 		velocity = (input_direction * ((moveSpeed * 10)) * walkMultiplier) * (delta * 90)
 		if (curStam < maxStam):
 			if (self.velocity.x == 0 and self.velocity.y == 0):
-				curStam = curStam + ((3.8*delta)*stamregenMultiplier)
+				curStam = curStam + ((5*delta)*stamregenMultiplier)
 			else:
-				curStam = curStam + ((1.2*delta)*stamregenMultiplier)
+				curStam = curStam + ((1*delta)*stamregenMultiplier)
 			
 			if (curStam > (maxStam * 0.15)):
 				disableSprint = false
@@ -134,7 +136,7 @@ var breatheTimer:float = 0
 func breathe(delta):
 	breatheTimer -= 1 * delta
 	
-	if breatheTimer < 0 and not onMachine:
+	if breatheTimer < 0:
 		breatheRange.disabled = false # Breathe Audio
 		if breatheTimer <= -1:
 			if (curStam/maxStam) > 0.2: # Under 20% Stamina.
@@ -153,6 +155,8 @@ func funnyAbility(delta):
 			'Self-Die':
 				health = -99
 			'Floaty Dash':
+				if onMachine:
+					return
 				#effectApply('walk', 0.5, 2)
 				#effectApply('run', 0.5, 2)
 				floatydashability[0] = 1
@@ -160,6 +164,10 @@ func funnyAbility(delta):
 				runMultiplier += 2
 				floatydashability[1] = true
 				breatheTimer = 0
+			'Tail Strike':
+				if curStam < 60 or onMachine:
+					return
+				curStam -= 60
 		
 		coolDownTimer = activeAbility[2]
 	
@@ -168,6 +176,26 @@ func funnyAbility(delta):
 		walkMultiplier -= 2
 		runMultiplier -= 2
 		floatydashability[1] = false
+	
+	match passiveAbility[0]:
+			'Happiness':
+				movement = 4
+				extraction = 5
+				if happiness >= 90:
+					movement = 4.4
+					extraction = 6
+				if happiness >= 65:
+					movement = 4.2
+					extraction = 5.5
+				if happiness < 40:
+					movement = 3
+					extraction = 4
+				if happiness < 25:
+					movement = 2
+					extraction = 3
+				if happiness <= 0:
+					movement = 1
+					extraction = 2
 	
 	match passiveAbility[0]:
 		'Glutton':
@@ -210,4 +238,17 @@ func loadToon(nam):
 		passiveAbility[1] = saved_data["passive"][1]
 		
 		file.close()
+#endregion
+
+#region Elevator
+func _on_elevator_area_entered(area):
+	if area.name == 'PlayerCollision':
+		print('get out!')
+		if floorShit.panicMode:
+			floorShit.panicMode = false
+			floorShit.newFloor()
+
+func _on_elevator_area_exited(area):
+	if area.name == 'PlayerCollision':
+		print('get out!')
 #endregion

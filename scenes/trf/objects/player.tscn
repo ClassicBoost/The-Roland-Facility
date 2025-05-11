@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ce1hj13r5d67u"]
 
-[ext_resource type="Script" path="res://scenes/trf/scripts/characters/player.gd" id="1_75lh4"]
+[ext_resource type="Script" uid="uid://co3iaj71hqqv0" path="res://scenes/trf/scripts/characters/player.gd" id="1_75lh4"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_e7ee0"]
 
@@ -29,3 +29,9 @@ position_smoothing_speed = 10.0
 
 [node name="breathingRadius" type="CollisionShape2D" parent="breath"]
 shape = SubResource("CircleShape2D_ujt54")
+
+[node name="PlayerCollision" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerCollision"]
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_ntews")

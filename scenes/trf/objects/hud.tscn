@@ -1,6 +1,6 @@
-[gd_scene load_steps=17 format=3 uid="uid://dktpjmfgyxawi"]
+[gd_scene load_steps=18 format=3 uid="uid://dktpjmfgyxawi"]
 
-[ext_resource type="Script" path="res://scenes/trf/scripts/hud.gd" id="1_umi3j"]
+[ext_resource type="Script" uid="uid://bv0avcr5x60ea" path="res://scenes/trf/scripts/hud.gd" id="1_umi3j"]
 [ext_resource type="FontFile" uid="uid://cxw0w38m3cye4" path="res://assets/fonts/vcr.ttf" id="2_6y8w7"]
 [ext_resource type="Texture2D" uid="uid://cdix5wfmrf7kx" path="res://assets/graphics/ui/heart.png" id="3_wplot"]
 
@@ -45,6 +45,9 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l0drw"]
 bg_color = Color(0.6, 0.6, 0.6, 0.705882)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xn1wd"]
+bg_color = Color(0, 0, 0, 1)
 
 [node name="hud" type="Control"]
 layout_mode = 3
@@ -221,8 +224,8 @@ offset_bottom = 192.0
 
 [node name="toon" type="LineEdit" parent="Debug"]
 layout_mode = 0
-offset_right = 320.0
-offset_bottom = 31.0
+offset_right = 448.0
+offset_bottom = 64.0
 placeholder_text = "Insert a toon name."
 
 [node name="Floor" type="NinePatchRect" parent="."]
@@ -251,5 +254,53 @@ theme_override_fonts/font = ExtResource("2_6y8w7")
 theme_override_font_sizes/font_size = 24
 text = "0/2 Machines"
 horizontal_alignment = 1
+
+[node name="Roland_Happiness" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 128.0
+offset_bottom = 512.0
+
+[node name="Panel" type="Panel" parent="Roland_Happiness"]
+layout_mode = 0
+offset_top = 16.0
+offset_right = 80.0
+offset_bottom = 440.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_rm38d")
+
+[node name="Panel2" type="Panel" parent="Roland_Happiness"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 432.0
+offset_right = 416.0
+offset_bottom = 496.0
+rotation = -1.5708
+theme_override_styles/panel = SubResource("StyleBoxTexture_16shb")
+
+[node name="happinessBar" type="ProgressBar" parent="Roland_Happiness"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 400.0
+offset_right = 384.0
+offset_bottom = 448.0
+rotation = -1.5708
+theme_override_styles/background = SubResource("StyleBoxFlat_xn1wd")
+theme_override_styles/fill = SubResource("StyleBoxTexture_agrdq")
+step = 0.001
+value = 50.0
+show_percentage = false
+
+[node name="happinessText" type="Label" parent="Roland_Happiness"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 392.0
+offset_right = 72.0
+offset_bottom = 432.0
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("2_6y8w7")
+theme_override_font_sizes/font_size = 24
+text = "50%"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="text_submitted" from="Debug/toon" to="." method="toon_name_debug"]

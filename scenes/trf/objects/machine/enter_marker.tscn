@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0gy0yms3r047"]
+
+[ext_resource type="Script" uid="uid://ce0nfchg4hkkd" path="res://scenes/trf/scripts/objects/machine_enter.gd" id="1_ymba8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tnwqi"]
+size = Vector2(256, 192)
+
+[node name="EnterMarker" type="Area2D"]
+script = ExtResource("1_ymba8")
+
+[node name="LOL" type="CollisionShape2D" parent="."]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_tnwqi")
+debug_color = Color(1, 1, 1, 0.42)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

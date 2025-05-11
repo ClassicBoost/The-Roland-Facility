@@ -9,7 +9,7 @@
 	"extraction": 5,
 	"skillchance": 0.3,
 	
-	"active": ["Floaty Dash", "Allows you to dash gaining high speed\nhowever this causes a lot of noise.", 3],
+	"active": ["Floaty Dash", "Allows you to dash gaining high speed\nhowever this causes a lot of noise.", 45],
 	"passive": ["Happiness", "Changes on certain events, can be benefital\nor hurtful."],
 	
 	"description": "This is a toon that is based on Flutter, though having a higher extraction reliability. Just don't get chased too long now."
